@@ -7,6 +7,10 @@ const protectedRoutes = require('./routes/protectedRoutes');
 const dashboardRoutes = require('./routes/dashboardRoute'); // Add this line
 const membershipRoutes = require('./routes/membershipRoute');
 const profileRoutes = require('./routes/profileRoute');
+const serviceRoutes = require('./routes/serviceRoute');
+const bookingRoutes = require('./routes/bookingRoute');
+
+
 
 // Load .env file from the root of the project directory
 dotenv.config({ path: path.resolve(__dirname, '.env') });
@@ -45,6 +49,9 @@ app.use('/api/memberships', membershipRoutes);
 // Use profile routes
 app.use('/api/profile', profileRoutes);
 
+app.use('/api/services', serviceRoutes);
+
+app.use('/api/bookings', bookingRoutes);
 
 const PORT = process.env.PORT || 5000;
 
