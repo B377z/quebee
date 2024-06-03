@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');  // Import the cors middleware
 const path = require('path'); // Add this line
 const authRoutes = require('./routes/authRoute.js')
 const protectedRoutes = require('./routes/protectedRoutes');
@@ -18,6 +19,9 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 console.log('MONGO:', process.env.MONGO); // Add this line to debug
 
 const app = express();
+
+// Use CORS middleware
+app.use(cors());
 
 app.use(express.json());
 
