@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 const path = require('path'); // Add this line
 const authRoutes = require('./routes/authRoute.js')
 const protectedRoutes = require('./routes/protectedRoutes');
+const dashboardRoutes = require('./routes/dashboardRoute'); // Add this line
+const membershipRoutes = require('./routes/membershipRoute');
+const profileRoutes = require('./routes/profileRoute');
 
 // Load .env file from the root of the project directory
 dotenv.config({ path: path.resolve(__dirname, '.env') });
@@ -32,6 +35,16 @@ app.use('/api/auth', authRoutes);
 
 // Use protected routes
 app.use('/api/protected', protectedRoutes);
+
+// Use dashboard routes
+app.use('/api/dashboard', dashboardRoutes); // Add this line
+
+// Use membership routes
+app.use('/api/memberships', membershipRoutes);
+
+// Use profile routes
+app.use('/api/profile', profileRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // Register a new user
 exports.register = async (req, res) => {
-  const { name, email, password, retypePassword } = req.body;
+  const { name, email, password, retypePassword, role} = req.body;
 
   try {
     // Check if the user already exists
@@ -19,7 +19,17 @@ exports.register = async (req, res) => {
     }
 
     // Create a new user
-    user = new User({ name, email, password });
+    const userFields = { name, email, password };
+
+    // Only allow role assignment if the requester is an admin
+    if (req.user && req.user.role === 'admin') {
+      userFields.role = role || 'customer';
+    } else {
+      userFields.role = 'customer';
+    }
+
+    // Create a new user
+    user = new User(userFields);
     await user.save();
 
     // Create and return a token
